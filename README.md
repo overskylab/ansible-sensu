@@ -18,7 +18,7 @@ None.
 
     - hosts: all
       roles:
-        - ansible-sensu
+        - ansible.sensu
 
 
 ## License

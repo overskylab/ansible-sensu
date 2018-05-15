@@ -1,0 +1,14 @@
+---
+- name: Include OS family specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}.yml"
+
+- import_tasks: sensu_pre.yml
+- import_tasks: sensu_install.yml
+
+- block: # Config sensu
+  - import_tasks: sensu_search_config.yml
+  - import_tasks: sensu_post.yml
+  tags:
+    - sensu-config

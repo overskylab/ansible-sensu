@@ -1,0 +1,30 @@
+---
+- name: Set list of path to look for local sensu configuration directory
+  set_fact:
+    sensu_search_config_paths: "{{ sensu_search_config_paths }} + [ '{{ sensu_search_config_path }}' ]"
+  with_items: "{{ group_names }}"
+
+- name: Check if sensu configuration directory exists
+  stat:
+    path: "{{ item }}"
+  register: sensu_config_check
+  become: false
+  delegate_to: 127.0.0.1
+  with_first_found:
+    - files: "{{ sensu_search_config_paths }}"
+      skip: true
+
+- name: Set sensu configuration directory
+  set_fact:
+    sensu_host_config_path: "{{ sensu_config_check.results[0].stat.path }}"
+  when:
+    - sensu_config_check.results[0] is defined
+    - sensu_config_check.results[0].stat is defined
+    - sensu_config_check.results[0].stat.isdir
+
+- name: Check if sensu template configuration file is exists
+  stat:
+    path: "{{ sensu_host_config_file_path }}"
+  become: false
+  delegate_to: 127.0.0.1
+  register: sensu_config_check

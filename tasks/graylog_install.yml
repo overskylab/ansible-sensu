@@ -1,0 +1,19 @@
+---
+- name: Install sensu packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - "{{ sensu_apt_package }}"
+    - "{{ sensu_apt_dependencies }}"
+
+- name: Ensure service enable
+  service:
+    name: "{{ item }} "
+    enabled: yes
+    state: started
+  with_items:
+    - "{{ sensu_server_service_name }}"
+    - "{{ sensu_api_service_name }}"
+    - "{{ sensu_client_service_name }}"

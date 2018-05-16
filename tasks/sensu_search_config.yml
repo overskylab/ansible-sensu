@@ -28,3 +28,10 @@
   become: false
   delegate_to: 127.0.0.1
   register: sensu_config_check
+
+- name: Check if sensu ssl directory is exists
+  stat:
+    path: "{{ sensu_host_config_ssl_path }}"
+  become: false
+  delegate_to: 127.0.0.1
+  register: sensu_config_ssl_check

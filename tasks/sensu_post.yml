@@ -12,6 +12,19 @@
     - Restart sensu api
     - Restart sensu client
 
+- name: Copy SSL certificates directory
+  copy:
+    src: "{{ sensu_host_config_path }}/ssl"
+    dest: "{{ sensu_config_path }}/"
+  when:
+    - sensu_config_ssl_check.stat.isdir is defined
+    - sensu_config_ssl_check.stat.isdir
+  notify: 
+    - Restart sensu server
+    - Restart sensu api
+    - Restart sensu client
+
+
 - block: # Dynamic configuration style
   - name: Combine dict sensu_handler and sensu_handler_plugins
     set_fact:

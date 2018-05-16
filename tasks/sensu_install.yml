@@ -10,10 +10,10 @@
 
 - name: Ensure service enable
   service:
-    name: "{{ item }} "
+    name: "{{ item }}"
     enabled: yes
     state: started
   with_items:
-    - "{{ sensu_server_service_name }}"
-    - "{{ sensu_api_service_name }}"
-    - "{{ sensu_client_service_name }}"
+    - sensu-server
+    - sensu-api
+    - sensu-client

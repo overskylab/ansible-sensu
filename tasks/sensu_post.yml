@@ -1,10 +1,27 @@
 ---
 - name: Copy sensu configuration file
-  template:
-    src: "{{ sensu_host_config_file_path }}"
-    dest: "{{ sensu_config_file_path }}"
-    owner: root
-    group: root
-    mode: 0644
+  synchronize:
+    src: "{{ sensu_host_config_file_path }}/"
+    dest: "{{ sensu_config_base_path }}/"
+    delete: yes
+    rsync_opts:
+      - "--exclude=ssl"
   when: sensu_config_check.stat.exists
-  notify: Restart {{ sensu_server_service_name }}
+  notify: 
+    - Restart sensu server
+    - Restart sensu api
+    - Restart sensu client
+
+- block: # Dynamic configuration style
+  - name: Combine dict sensu_handler and sensu_handler_plugins
+    set_fact:
+      sensu_handlers_combined: "{{ { 'handlers': sensu_handlers } | combine(sensu_handler_plugins) }}"
+
+  - name: Drop sensu configuration file(s)
+    template:
+      src: config.json.j2
+      dest: "{{ sensu_config_file_path }}"
+    when: not sensu_config_check.stat.exists
+    notify: Restart sensu server
+
+- meta: flush_handlers

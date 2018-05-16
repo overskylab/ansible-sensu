@@ -4,6 +4,7 @@
     url: "{{ sensu_apt_key_url }}"
     state: present
 
-- name: Install sensu DEB repository
-  apt:
-    deb: "{{ sensu_deb_url }}"
+- name: Install sensu apt repository
+  apt_repository:
+    repo: "{{ sensu_deb_url }}"
+    state: present

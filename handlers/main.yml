@@ -1,15 +1,15 @@
 ---
-- name: Restart {{ sensu_server_service_name }}
+- name: Restart sensu server
   service:
-    name: {{ sensu_server_service_name }}
+    name: sensu-server
     state: restarted
 
-- name: Restart sensu-api
+- name: Restart sensu api
   service:
     name: sensu-api
     state: restarted
 
-- name: Restart sensu-client
+- name: Restart sensu client
   service:
     name: sensu-client
     state: restarted

@@ -2,7 +2,8 @@
 sensu_search_config_path: "{{ playbook_dir }}/files/groups/{{ item }}/sensu"
 sensu_search_config_paths: []
 
-sensu_host_config_file_path: "{{ sensu_host_config_path | default(inventory_hostname) }}/server.conf.j2"
+sensu_host_config_file_path: "{{ sensu_host_config_path | default(inventory_hostname) }}/sensu.json.j2"
+sensu_host_config_ssl_path: "{{ sensu_host_config_path | default(inventory_hostname) }}/ssl"
 sensu_config_base_path: /etc/sensu
 sensu_config_path: /etc/sensu/conf.d
 sensu_config_file_path: /etc/sensu/config.json
@@ -33,36 +34,45 @@ sensu_redis_sentinels: []
 sensu_redis_master_name: ""
 
 # Sensu API
-sensu_api_host: localhost
-sensu_api_port: 4567
-sensu_api_user_name: ""
-sensu_api_password: ""
+sensu_api: {}
+  ## Example
+  # host: localhost
+  # port: 4567
+  # user: ""
+  # password: ""
 
 # Sensu client
-sensu_client_name: sensu-client
-sensu_client_address: localhost
-sensu_client_subscriptions: []
-sensu_client_keepalive_handlers: []
-sensu_client_keepalive_thresholds:
-  warning: 70
-  critical: 90
-sensu_client_safe_mode: false
+sensu_client: {}
+  ## Example
+  # name: sensu-client
+  # address: localhost
+  # subscriptions: 
+  #   - sample
+  # keepalive_handlers: []
+  # keepalive_thresholds:
+  #   warning: 70
+  #   critical: 90
+  # safe_mode: false
 
 # Sensu handlers
-sensu_handlers:
-  default:
-    type: set
-    handlers: 
-      - stdout
-      - slack
-  slack:
-    type: pipe
-    command: handler-slack.rb
-    severities:
-      - critical
-      - ok
-    filters: []
+sensu_handlers: {}
+  ## Example
+  # default:
+  #   type: set
+  #   handlers: 
+  #     - stdout
+  #     - slack
+  # slack:
+  #   type: pipe
+  #   command: handler-slack.rb
+  #   severities:
+  #     - critical
+  #     - warning
+  #     - ok
+  #   filters:
+  #     - staging
 
+# Sensu handler plugins setting
 sensu_handler_plugins: {}
   ## Example
   # slack:
@@ -75,12 +85,29 @@ sensu_handler_plugins: {}
 # Sensu filters
 sensu_filters: {}
   ## Example
-  # check_state:
-  #   negate: false
+  # staging:
+  #   negate: true # exclusive filtering
   #   attributes:
   #     action: "eval: %w(create resolve).include? value.to_s",
   #     occurrences: "eval: value != 1 || value % 5 == 0 ||':::action:::' == 'create'"
+  #     client:
+  #       environment: staging
+
 
 # Sensu checks
-checks:
-  - name: check_test
+sensu_checks: {}
+  ## Example
+  # check_google:
+  #   handlers: 
+  #     - default
+  #     - slack
+  #   command: "/usr/local/bin/check-http.rb -u https://www.google.com 2> /dev/null"
+  #   interval: 5
+  #   timeout: 30
+  #   ttl: 120
+  #   occurrences: 3
+  #   refresh: 300
+  #   subscribers:
+  #     - sample
+  #   environment: ":::environment|staging:::"
+  #   notification: "HTTP Check - www.google.com"

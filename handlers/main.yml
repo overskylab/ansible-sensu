@@ -1,5 +1,5 @@
 ---
-- name: Restart sensu
+- name: Restart sensu-server
   service:
     name: sensu-server
     state: restarted

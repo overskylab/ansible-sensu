@@ -32,3 +32,55 @@ sensu_redis_password: CHANGEME
 sensu_redis_sentinels: []
 sensu_redis_master_name: ""
 
+# Sensu API
+sensu_api_host: localhost
+sensu_api_port: 4567
+sensu_api_user_name: ""
+sensu_api_password: ""
+
+# Sensu client
+sensu_client_name: sensu-client
+sensu_client_address: localhost
+sensu_client_subscriptions: []
+sensu_client_keepalive_handlers: []
+sensu_client_keepalive_thresholds:
+  warning: 70
+  critical: 90
+sensu_client_safe_mode: false
+
+# Sensu handlers
+sensu_handlers:
+  default:
+    type: set
+    handlers: 
+      - stdout
+      - slack
+  slack:
+    type: pipe
+    command: handler-slack.rb
+    severities:
+      - critical
+      - ok
+    filters: []
+
+sensu_handler_plugins: {}
+  ## Example
+  # slack:
+  #   webhook_url: https://hooks.slack.com/services/sample
+  #   dashboard: "http://uchiwa.example.com/#/client/$DataCenter/"
+  #   channel: "#general"
+  #   icon_url: https://raw.githubusercontent.com/sensu/sensu-logo/master/sensu1_flat%20white%20bg_png.png
+  #   icon_emoji: ":snowman:"
+
+# Sensu filters
+sensu_filters: {}
+  ## Example
+  # check_state:
+  #   negate: false
+  #   attributes:
+  #     action: "eval: %w(create resolve).include? value.to_s",
+  #     occurrences: "eval: value != 1 || value % 5 == 0 ||':::action:::' == 'create'"
+
+# Sensu checks
+checks:
+  - name: check_test

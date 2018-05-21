@@ -26,11 +26,13 @@
         "private_key_file": "{{ sensu_rabbitmq_key_file }}"
       },
 {% endif %}
+{% if sensu_rabbitmq_username and sensu_rabbitmq_password %}
+      "user": "{{ sensu_rabbitmq_username }}",
+      "password": "{{ sensu_rabbitmq_password }}",
+{% endif %}
       "host": "{{ sensu_rabbitmq_host }}",
       "port": {{ sensu_rabbitmq_port }},
-      "vhost": "{{ sensu_rabbitmq_vhost }}",
-      "user": "{{ sensu_rabbitmq_username }}",
-      "password": "{{ sensu_rabbitmq_password }}"
+      "vhost": "{{ sensu_rabbitmq_vhost }}"
     }
   ,
   "redis": 

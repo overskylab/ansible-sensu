@@ -18,7 +18,7 @@ sensu_client_service_name: sensu-client
 
 # RabbitMQ settings
 sensu_rabbitmq_host: localhost
-sensu_rabbitmq_port: 4369
+sensu_rabbitmq_port: 5672
 sensu_rabbitmq_vhost: /sensu
 sensu_rabbitmq_username: rabbitmq
 sensu_rabbitmq_password: CHANGEME

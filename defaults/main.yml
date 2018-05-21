@@ -2,7 +2,7 @@
 sensu_search_config_path: "{{ playbook_dir }}/files/groups/{{ item }}/sensu"
 sensu_search_config_paths: []
 
-sensu_host_config_file_path: "{{ sensu_host_config_path | default(inventory_hostname) }}/config.json"
+sensu_host_config_file_path: "{{ sensu_host_config_path | default(inventory_hostname) }}/config.json.j2"
 sensu_host_config_ssl_path: "{{ sensu_host_config_path | default(inventory_hostname) }}/ssl"
 sensu_config_base_path: /etc/sensu
 sensu_config_path: /etc/sensu/conf.d

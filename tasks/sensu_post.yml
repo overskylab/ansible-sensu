@@ -1,8 +1,8 @@
 ---
 - name: Copy sensu configuration file
   synchronize:
-    src: "{{ sensu_host_config_path }}/"
-    dest: "{{ sensu_config_base_path }}/"
+    src: "{{ sensu_host_config_path }}/conf.d/"
+    dest: "{{ sensu_config_path }}/"
     delete: yes
     rsync_opts:
       - "--exclude=ssl"

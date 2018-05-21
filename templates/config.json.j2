@@ -1,28 +1,23 @@
 {
 {% if sensu_api %}
-  {
-    "api": {{ sensu_api | to_nice_json(indent=6) }}
-  },
+  "api": {{ sensu_api | to_nice_json(indent=6) }}
+  ,
 {% endif %}
 {% if sensu_client %}
-  {
-    "client": {{ sensu_client | to_nice_json(indent=6) }} 
-  },
+  "client": {{ sensu_client | to_nice_json(indent=6) }} 
+  ,
 {% endif %}
 {% if sensu_handlers_combined and (sensu_handlers or sensu_handler_plugins) %}
   {{ sensu_handlers_combined | to_nice_json(indent=6) }},
 {% endif %}
 {% if sensu_filters %}
-  {
-    "filters": {{ sensu_filters | to_nice_json(indent=6) }}
-  },
+  "filters": {{ sensu_filters | to_nice_json(indent=6) }}
+  ,
 {% endif %}
 {% if sensu_checks %}
-  {
-    "checks": {{ sensu_checks | to_nice_json(indent=6) }}
-  },
+  "checks": {{ sensu_checks | to_nice_json(indent=6) }}
+  ,
 {% endif %}
-  {
   "rabbitmq": 
     {
 {% if sensu_rabbitmq_ssl %}
@@ -37,9 +32,8 @@
       "user": "{{ sensu_rabbitmq_username }}",
       "password": "{{ sensu_rabbitmq_password }}"
     }
-  },
-  {
-    "redis": 
+  ,
+  "redis": 
     {
 {% if sensu_redis_password %}
       "password": "{{ sensu_redis_password }}",
@@ -52,5 +46,4 @@
       "port": {{ sensu_redis_port }}
 {% endif %}
     }
-  }
 }

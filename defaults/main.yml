@@ -8,6 +8,10 @@ sensu_config_base_path: /etc/sensu
 sensu_config_path: /etc/sensu/conf.d
 sensu_config_file_path: /etc/sensu/config.json
 
+sensu_apt_dependencies:
+  - apt-transport-https
+  - build-essential
+
 # AIO
 sensu_all_in_one: false
 

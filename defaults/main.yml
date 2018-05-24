@@ -12,6 +12,11 @@ sensu_apt_dependencies:
   - apt-transport-https
   - build-essential
 
+# See more plugins : https://github.com/sensu-plugins
+sensu_plugins:
+  - sensu-plugins-http
+  - sensu-plugins-slack
+
 # AIO
 sensu_all_in_one: false
 

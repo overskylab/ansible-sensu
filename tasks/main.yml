@@ -12,3 +12,8 @@
   - import_tasks: sensu_post.yml
   tags:
     - sensu-config
+
+- import_tasks: sensu_install_plugin.yml
+  tags:
+    - sensu-install-plugin
+    - sensu-plugin

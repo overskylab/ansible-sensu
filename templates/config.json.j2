@@ -7,16 +7,27 @@
   "client": {{ sensu_client | to_nice_json(indent=6) }} 
   ,
 {% endif %}
-{% if sensu_handlers_combined and (sensu_handlers or sensu_handler_plugins) %}
-  {{ sensu_handlers_combined | to_nice_json(indent=6) }},
+{% if sensu_handlers %}
+  "handlers": {{ sensu_handlers | to_nice_json(indent=6) }}
+  ,
+{% endif %}
+{% if sensu_handler_plugins %}
+{% for key, value in sensu_handler_plugins.iteritems() %}
+  "{{ key }}": {{ value | to_nice_json(indent=6) }}
+{% endfor %}
+  ,
 {% endif %}
 {% if sensu_filters %}
   "filters": {{ sensu_filters | to_nice_json(indent=6) }}
   ,
 {% endif %}
 {% if sensu_checks %}
-  "checks": {{ sensu_checks | to_nice_json(indent=6) }}
+  "checks": 
+{% for check in sensu_checks %}
+    {{ check | to_nice_json(indent=4) }}
+{% endfor %}  
   ,
+
 {% endif %}
   "rabbitmq": 
     {

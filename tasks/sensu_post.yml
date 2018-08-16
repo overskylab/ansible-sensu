@@ -24,13 +24,7 @@
     - Restart sensu api
     - Restart sensu client
 
-
 - block: # Dynamic configuration style
-  - name: Combine dict sensu_handler and sensu_handler_plugins
-    set_fact:
-      sensu_handlers_combined: "{{ { 'handlers': sensu_handlers } | combine(sensu_handler_plugins) }}"
-    when: not sensu_config_check.stat.exists
-
   - name: Drop sensu configuration file(s)
     template:
       src: config.json.j2

@@ -13,9 +13,8 @@
 {% endif %}
 {% if sensu_handler_plugins %}
 {% for key, value in sensu_handler_plugins.iteritems() %}
-  "{{ key }}": {{ value | to_nice_json(indent=6) }}
+  "{{ key }}": {{ value | to_nice_json(indent=6) }},
 {% endfor %}
-  ,
 {% endif %}
 {% if sensu_filters %}
   "filters": {{ sensu_filters | to_nice_json(indent=6) }}
@@ -23,11 +22,9 @@
 {% endif %}
 {% if sensu_checks %}
   "checks": 
-{% for check in sensu_checks %}
-    {{ check | to_nice_json(indent=4) }}
+{% for key, value in sensu_checks.iteritems() %}
+    "{{ key }}": {{ value | to_nice_json(indent=6) }},
 {% endfor %}  
-  ,
-
 {% endif %}
   "rabbitmq": 
     {

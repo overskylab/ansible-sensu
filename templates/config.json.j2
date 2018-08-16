@@ -21,10 +21,8 @@
   ,
 {% endif %}
 {% if sensu_checks %}
-  "checks": 
-{% for key, value in sensu_checks.iteritems() %}
-    "{{ key }}": {{ value | to_nice_json(indent=6) }},
-{% endfor %}  
+  "checks": {{ sensu_checks | to_nice_json(indent=6) }}
+  ,
 {% endif %}
   "rabbitmq": 
     {

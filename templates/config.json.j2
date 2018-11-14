@@ -12,7 +12,7 @@
   ,
 {% endif %}
 {% if sensu_handler_plugins %}
-{% for key, value in sensu_handler_plugins.iteritems() %}
+{% for key, value in sensu_handler_plugins.items() %}
   "{{ key }}": {{ value | to_nice_json(indent=6) }},
 {% endfor %}
 {% endif %}

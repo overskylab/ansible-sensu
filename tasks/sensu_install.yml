@@ -8,12 +8,24 @@
     - "{{ sensu_apt_package }}"
     - "{{ sensu_apt_dependencies }}"
 
-- name: Ensure service enable
-  service:
-    name: "{{ item }}"
-    enabled: yes
-    state: started
-  with_items:
-    - sensu-server
-    - sensu-api
-    - sensu-client
+- block: # Ensuring services
+  - name: Ensure sensu server service enabled
+    service:
+      name: sensu-server
+      enabled: yes
+      state: started
+    when: sensu_checks
+
+  - name: Ensure sensu api service enabled
+    service:
+      name: sensu-api
+      enabled: yes
+      state: started
+    when: sensu_api
+
+  - name: Ensure sensu client service enabled
+    service:
+      name: sensu-client
+      enabled: yes
+      state: started
+    when: sensu_client

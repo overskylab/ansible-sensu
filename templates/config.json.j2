@@ -1,31 +1,33 @@
 {
 {% if sensu_api %}
-  "api":
+  "api": {
     "host": "{{ sensu_api.host }}",
     "port": {{ sensu_api.port }}
+  }
 {% endif %}
 {% if sensu_client %}
-  "client": {{ sensu_client | to_nice_json(indent=6) }} 
   ,
+  "client": {{ sensu_client | to_nice_json(indent=6) }} 
 {% endif %}
 {% if sensu_handlers %}
-  "handlers": {{ sensu_handlers | to_nice_json(indent=6) }}
   ,
+  "handlers": {{ sensu_handlers | to_nice_json(indent=6) }}
 {% endif %}
 {% if sensu_handler_plugins %}
+  ,
 {% for key, value in sensu_handler_plugins.items() %}
   "{{ key }}": {{ value | to_nice_json(indent=6) }},
 {% endfor %}
 {% endif %}
 {% if sensu_filters %}
   "filters": {{ sensu_filters | to_nice_json(indent=6) }}
-  ,
 {% endif %}
 {% if sensu_checks %}
-  "checks": {{ sensu_checks | to_nice_json(indent=6) }}
   ,
+  "checks": {{ sensu_checks | to_nice_json(indent=6) }}
 {% endif %}
 {% if sensu_rabbitmq_enabled %}
+  ,
   "rabbitmq": 
     {
 {% if sensu_rabbitmq_ssl %}

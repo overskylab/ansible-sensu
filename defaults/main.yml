@@ -26,6 +26,7 @@ sensu_api_service_name: sensu-api
 sensu_client_service_name: sensu-client
 
 # RabbitMQ settings
+sensu_rabbitmq_enabled: true
 sensu_rabbitmq_host: localhost
 sensu_rabbitmq_port: 5672
 sensu_rabbitmq_vhost: /sensu
@@ -36,6 +37,7 @@ sensu_rabbitmq_cert_file: "{{ sensu_config_base_path }}/ssl/cert.pem"
 sensu_rabbitmq_key_file: "{{ sensu_config_base_path }}/ssl/key.pem"
 
 # Redis settings
+sensu_redis_enabled: true
 sensu_redis_host: localhost
 sensu_redis_port: 6379
 sensu_redis_password: CHANGEME

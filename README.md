@@ -1,30 +1,22 @@
 # Ansible Role: sensu
-
-
+N/A
 
 ## Requirements
-
 None.
 
 ## Role Variables
-
-
+N/A
 
 ## Dependencies
-
 None.
 
 ## Example Playbook
 
-    - hosts: all
-      roles:
-        - opsta.sensu
-
+```yaml
+- hosts: all
+  roles:
+    - overskylab.sensu
+```
 
 ## License
-
 MIT
-
-## Author Information
-
-Opsta (Thailand) Co.,Ltd.

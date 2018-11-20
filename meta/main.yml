@@ -2,7 +2,6 @@
 galaxy_info:
   author: Teerawat Namsricharoensuk
   description: Ansible role to install and config sensu stack
-  company: "Opsta (Thailand) Co.,Ltd."
   license: "MIT"
   min_ansible_version: 2.4
   platforms:
@@ -11,7 +10,6 @@ galaxy_info:
     - trusty
     - xenial
   galaxy_tags:
-    - log
     - sensu
     - alert
 dependencies: []

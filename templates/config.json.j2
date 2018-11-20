@@ -6,8 +6,12 @@
   }
 {% endif %}
 {% if sensu_client %}
-  ,
+  {{ ',' if sensu_api else '' }}
   "client": {{ sensu_client | to_nice_json(indent=6) }} 
+{% endif %}
+{% if sensu_checks %}
+  {{ ',' if sensu_api or sensu_client else '' }}
+  "checks": {{ sensu_checks | to_nice_json(indent=6) }}
 {% endif %}
 {% if sensu_handlers %}
   ,
@@ -21,10 +25,6 @@
 {% endif %}
 {% if sensu_filters %}
   "filters": {{ sensu_filters | to_nice_json(indent=6) }}
-{% endif %}
-{% if sensu_checks %}
-  ,
-  "checks": {{ sensu_checks | to_nice_json(indent=6) }}
 {% endif %}
 {% if sensu_rabbitmq_enabled %}
   ,

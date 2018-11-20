@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: sensu
   author: Teerawat Namsricharoensuk
   description: Ansible role to install and config sensu stack
   license: "MIT"

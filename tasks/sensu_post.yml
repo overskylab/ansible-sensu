@@ -7,10 +7,7 @@
     group: root
     mode: 0644
   when: sensu_config_check.stat.exists
-  notify: 
-    - Restart sensu server
-    - Restart sensu api
-    - Restart sensu client
+  notify: Restart sensu server
 
 - name: Copy SSL certificates directory
   copy:
@@ -30,9 +27,6 @@
       src: config.json.j2
       dest: "{{ sensu_config_file_path }}"
     when: not sensu_config_check.stat.exists
-    notify: 
-      - Restart sensu server
-      - Restart sensu api
-      - Restart sensu client
+    notify: Restart sensu server
 
 - meta: flush_handlers
